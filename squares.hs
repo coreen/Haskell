@@ -12,11 +12,12 @@ recursive(x:xs) = (x ^ 2) : recursive xs
 recursive [] = []
 
 -- unit test cases
-c1 = TestCase (assertEqual "infinite squares" [1,9,25,49] (take 4 (recursive [1,3 ..])))
-c2 = TestCase (assertEqual "sample squares" [1,4,100] (recursive [1,2,10]))
-c3 = TestCase (assertEqual "empty list" [] (recursive []))
+c1_1 = TestCase (assertEqual "infinite squares" [1,9,25,49] (take 4 (recursive [1,3 ..])))
+c1_2 = TestCase (assertEqual "sample squares" [1,4,100] (recursive [1,2,10]))
+c1_3 = TestCase (assertEqual "empty list" [] (recursive []))
+
+-- set the test cases to be run
+tests = TestList[TestLabel "infinite recursive" c1_1, TestLabel "sample recursive" c1_2, TestLabel "empty recursive" c1_3]
 
 -- run the unit tests
-run = runTestTT TestList[TestLabel "infinite test" c1,
-                         TestLabel "sample test" c2,
-                         TestLabel "empty test" c3]
+run = runTestTT tests
